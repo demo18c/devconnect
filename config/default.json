@@ -1,0 +1,4 @@
+{
+	"mongoURI": "mongodb+srv://demo18c:RAlades11@devconnect.wlhgi.mongodb.net/devconnect?retryWrites=true&w=majority",
+	"jwtSecret": "PorscheMacan"
+}
