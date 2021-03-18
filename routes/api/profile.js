@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResults } = require('express-validator/check');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
@@ -33,7 +33,7 @@ router.post(
 		[check('status', 'Status is required').not().isEmpty(), check('skills', 'Skills is required').not().isEmpty()]
 	],
 	async (req, res) => {
-		const errors = validationResult(req);
+		const errors = validationResults(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.array() });
 		}
@@ -88,8 +88,46 @@ router.get('/', async (req, res) => {
 		res.json(profiles);
 	} catch (error) {
 		console.log(err.message);
+	}
+	res.status(500).send('Server Error');
+});
+
+//a get api/profile/user/:user_id
+//get profile by id
+//public
+
+router.get('/user/:user_id', async (req, res) => {
+	try {
+		const profiles = await Profile.findOne({ user: re.params.user._id }).populate('user', ['name', 'avatar']);
+		if (!profile) return res.status(400).json({ msg: 'Profile not found' });
+		res.json(profiles);
+	} catch (error) {
+		console.log(err.message);
+		if (err.kind == 'ObjectId') {
+			return res.status(400).json({ msg: 'Profile not found' });
+		}
 		res.status(500).send('Server Error');
 	}
+});
+
+//@route delete api/profile
+//@desciption       delete profile, user ,post
+//@access           private
+
+router.delete('/', auth, async (req, res) => {
+	try {
+		//remove post
+
+		//remove profile
+		await Profile.findOneAndRemove({ user: req.user.id });
+		//remove user
+		await User.findOneAndRemove({ _id: req.user.id });
+
+		res.json('User dealt with!!1');
+	} catch (error) {
+		console.log(err.message);
+	}
+	res.status(500).send('Server Error');
 });
 
 module.exports = router;
