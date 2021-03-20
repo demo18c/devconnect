@@ -4,7 +4,7 @@ const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const brcrypt = require('bcryptjs');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator/check');
 
 const User = require('../../models/User');
 
@@ -13,14 +13,14 @@ const User = require('../../models/User');
 //access public
 //adding auth from middlware makes protected
 //return user data
-// router.get('/', auth, async (req, res) => {
-// 	try {
-// 		const user = await User.findById(req.user.id).select('-password');
-// 		res.json(user);
-// 	} catch (err) {
-// 		res.status(500).send('Server Error');
-// 	}
-// });
+router.get('/', auth, async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id).select('-password');
+		res.json(user);
+	} catch (err) {
+		res.status(500).send('Server Error');
+	}
+});
 
 //route POST api/auth
 //desc authenticate user

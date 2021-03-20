@@ -29,7 +29,7 @@ function authReducer(state = initialState, action) {
 				loading: false
 			};
 		case REGISTER_FAIL:
-			localStorage.removeItem('token');
+			// localStorage.removeItem('token');
 			return {
 				...state,
 				tokem: null,
