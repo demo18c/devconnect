@@ -6,7 +6,7 @@ const NavBar = () => {
 		<nav className="navbar bg-dark">
 			<h1>
 				<Link to="/">
-					<i className="fas fa-code" /> Notio
+					<i className="fas fa-code" /> Creare
 				</Link>
 			</h1>
 			<ul>
