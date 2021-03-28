@@ -1,10 +1,10 @@
 import {
 	REGISTER_SUCCESS,
-	REGISTER_FAIL,
+	// REGISTER_FAIL,
 	USER_LOADED,
 	AUTH_ERROR,
 	LOGIN_SUCCESS,
-	LOGIN_FAIL,
+	// LOGIN_FAIL,
 	LOGOUT
 } from '../actions/types';
 
@@ -38,10 +38,10 @@ function authReducer(state = initialState, action) {
 				loading: false
 			};
 
-		case REGISTER_FAIL:
+		// case REGISTER_FAIL:
 		case AUTH_ERROR:
-		case LOGIN_FAIL:
-			// case LOGOUT:
+		// case LOGIN_FAIL:
+		case LOGOUT:
 			return {
 				...state,
 				token: null,

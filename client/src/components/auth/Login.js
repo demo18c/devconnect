@@ -59,7 +59,7 @@ function Login({ login, isAuthenticated }) {
 					/>
 				</div>
 
-				<input type="submit" className="btn btn-primary" Value="Login" />
+				<input type="submit" className="btn btn-primary" value="Login" />
 			</form>
 			<p className="my-1">
 				Dont have an account? <Link to="/register">Sign Up</Link>

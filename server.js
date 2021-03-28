@@ -1,13 +1,24 @@
 //app name : Creare
 
 const express = require('express');
-const app = express();
 const connectDB = require('./config/db');
+
+const app = express();
 
 //connect database
 connectDB();
 
-app.get('/', (req, res) => res.send('API running'));
+// app.get('/', (req, res) => res.send('API running'));
+
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+	// Set static folder
+	app.use(express.static('client/build'));
+
+	app.get('/', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
 
 //init middleware
 app.use(express.json({ extended: false }));
